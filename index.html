@@ -1,0 +1,1208 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>混元九龍太子聖誕｜報名管理中心</title>
+
+<style>
+*{
+  box-sizing:border-box;
+}
+
+body{
+  margin:0;
+  font-family:
+    -apple-system,
+    BlinkMacSystemFont,
+    "Noto Sans TC",
+    "Microsoft JhengHei",
+    sans-serif;
+  background:#f6f2ea;
+  color:#35261c;
+}
+
+.header{
+  background:linear-gradient(135deg,#71351f,#9b5130);
+  color:white;
+  padding:26px 18px 30px;
+}
+
+.headerInner{
+  max-width:1100px;
+  margin:auto;
+}
+
+.headerSmall{
+  font-size:14px;
+  opacity:.85;
+  margin-bottom:6px;
+}
+
+.header h1{
+  margin:0;
+  font-size:27px;
+}
+
+.header p{
+  margin:8px 0 0;
+  opacity:.9;
+}
+
+.container{
+  max-width:1100px;
+  margin:auto;
+  padding:18px;
+}
+
+
+/* 狀態 */
+
+.statusBar{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  background:#fff;
+  padding:12px 15px;
+  border-radius:12px;
+  margin-bottom:16px;
+  box-shadow:0 2px 8px rgba(0,0,0,.06);
+  font-size:14px;
+}
+
+.statusDot{
+  width:10px;
+  height:10px;
+  background:#aaa;
+  border-radius:50%;
+}
+
+
+/* 統計 */
+
+.stats{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:12px;
+  margin-bottom:18px;
+}
+
+.stat{
+  background:white;
+  border-radius:14px;
+  padding:17px;
+  box-shadow:0 2px 8px rgba(0,0,0,.07);
+}
+
+.statTitle{
+  font-size:14px;
+  color:#796b60;
+}
+
+.statNumber{
+  font-size:30px;
+  font-weight:800;
+  margin-top:7px;
+}
+
+.statSub{
+  font-size:12px;
+  color:#9a8b80;
+  margin-top:4px;
+}
+
+.red{
+  color:#a43d27;
+}
+
+.green{
+  color:#277442;
+}
+
+.orange{
+  color:#a96712;
+}
+
+.blue{
+  color:#315e8d;
+}
+
+
+/* 卡片 */
+
+.card{
+  background:white;
+  border-radius:15px;
+  padding:18px;
+  margin-bottom:16px;
+  box-shadow:0 2px 8px rgba(0,0,0,.07);
+}
+
+.cardTitle{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  border-bottom:2px solid #eee4d8;
+  padding-bottom:11px;
+  margin-bottom:15px;
+}
+
+.cardTitle h2{
+  margin:0;
+  font-size:20px;
+  color:#743b23;
+}
+
+
+/* 禮斗 */
+
+.douTop{
+  display:flex;
+  justify-content:space-between;
+  align-items:end;
+  gap:10px;
+}
+
+.douNumber{
+  font-size:29px;
+  font-weight:800;
+  color:#8e4627;
+}
+
+.progress{
+  height:14px;
+  background:#eee5da;
+  border-radius:20px;
+  overflow:hidden;
+  margin-top:12px;
+}
+
+.progressBar{
+  width:0%;
+  height:100%;
+  background:#8c4c2e;
+  transition:.3s;
+}
+
+
+/* 搜尋 */
+
+.searchRow{
+  display:flex;
+  gap:10px;
+}
+
+.searchRow input{
+  flex:1;
+  padding:14px;
+  font-size:17px;
+  border:1px solid #cdbda9;
+  border-radius:10px;
+}
+
+button{
+  border:none;
+  border-radius:10px;
+  padding:13px 17px;
+  font-size:16px;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+.primary{
+  background:#783d24;
+  color:white;
+}
+
+.secondary{
+  background:#eee5da;
+  color:#4c382c;
+}
+
+
+/* 篩選 */
+
+.filters{
+  display:flex;
+  gap:8px;
+  overflow-x:auto;
+  padding-bottom:5px;
+}
+
+.filter{
+  white-space:nowrap;
+  background:#f1ebe3;
+  color:#5d493c;
+}
+
+.filter.active{
+  background:#783d24;
+  color:white;
+}
+
+
+/* 表格 */
+
+.tableWrap{
+  overflow-x:auto;
+}
+
+table{
+  width:100%;
+  border-collapse:collapse;
+  min-width:850px;
+}
+
+th{
+  text-align:left;
+  padding:12px 10px;
+  background:#f7f2ec;
+  color:#6a584b;
+  font-size:14px;
+}
+
+td{
+  padding:13px 10px;
+  border-bottom:1px solid #eee;
+  font-size:14px;
+}
+
+.empty{
+  text-align:center;
+  padding:35px 10px;
+  color:#999;
+}
+
+
+/* 狀態標籤 */
+
+.badge{
+  display:inline-block;
+  padding:5px 9px;
+  border-radius:20px;
+  font-size:12px;
+  font-weight:bold;
+}
+
+.badgeGreen{
+  background:#e5f3e8;
+  color:#276b39;
+}
+
+.badgeOrange{
+  background:#fff0d7;
+  color:#945b0c;
+}
+
+.badgeRed{
+  background:#fbe4e1;
+  color:#9e392d;
+}
+
+.badgeGray{
+  background:#eee;
+  color:#666;
+}
+
+
+/* 快速功能 */
+
+.quickGrid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:10px;
+}
+
+.quick{
+  background:#faf6f0;
+  border:1px solid #eadfd1;
+  border-radius:12px;
+  padding:17px 10px;
+  text-align:center;
+  font-weight:bold;
+}
+
+.quickIcon{
+  display:block;
+  font-size:27px;
+  margin-bottom:7px;
+}
+
+
+/* 手機 */
+
+@media(max-width:800px){
+
+  .stats{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .quickGrid{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+}
+
+@media(max-width:500px){
+
+  .header h1{
+    font-size:23px;
+  }
+
+  .container{
+    padding:12px;
+  }
+
+  .statNumber{
+    font-size:26px;
+  }
+
+  .searchRow{
+    flex-direction:column;
+  }
+
+}
+</style>
+</head>
+
+
+<body>
+
+
+<header class="header">
+
+  <div class="headerInner">
+
+    <div class="headerSmall">
+      混元九龍
+    </div>
+
+    <h1>
+      🙏 太子聖誕報名管理中心
+    </h1>
+
+    <p>
+      工作人員專用｜報名、收款與名冊管理
+    </p>
+
+  </div>
+
+</header>
+
+
+<main class="container">
+
+
+  <!-- 系統狀態 -->
+
+  <div class="statusBar">
+
+    <div
+      class="statusDot"
+      id="statusDot">
+    </div>
+
+    <span id="systemStatus">
+      尚未連接 Google 試算表
+    </span>
+
+  </div>
+
+
+
+  <!-- 統計 -->
+
+  <section class="stats">
+
+    <div class="stat">
+
+      <div class="statTitle">
+        👥 正式報名
+      </div>
+
+      <div
+        class="statNumber blue"
+        id="totalPeople">
+        0
+      </div>
+
+      <div class="statSub">
+        人
+      </div>
+
+    </div>
+
+
+    <div class="stat">
+
+      <div class="statTitle">
+        💬 LINE 已確認
+      </div>
+
+      <div
+        class="statNumber green"
+        id="lineConfirmed">
+        0
+      </div>
+
+      <div class="statSub">
+        人
+      </div>
+
+    </div>
+
+
+    <div class="stat">
+
+      <div class="statTitle">
+        💰 未繳清
+      </div>
+
+      <div
+        class="statNumber orange"
+        id="unpaid">
+        0
+      </div>
+
+      <div class="statSub">
+        人
+      </div>
+
+    </div>
+
+
+    <div class="stat">
+
+      <div class="statTitle">
+        ⚠️ 待處理
+      </div>
+
+      <div
+        class="statNumber red"
+        id="pending">
+        0
+      </div>
+
+      <div class="statSub">
+        筆
+      </div>
+
+    </div>
+
+  </section>
+
+
+
+  <!-- 禮斗名額 -->
+
+  <section class="card">
+
+    <div class="cardTitle">
+
+      <h2>
+        🏮 祈安禮斗名額
+      </h2>
+
+    </div>
+
+
+    <div class="douTop">
+
+      <div>
+
+        <div style="font-size:14px;color:#777;">
+          目前報名
+        </div>
+
+        <div class="douNumber">
+
+          <span id="douCount">
+            0
+          </span>
+
+          / 25
+
+        </div>
+
+      </div>
+
+
+      <div style="text-align:right;">
+
+        <div style="font-size:14px;color:#777;">
+          剩餘名額
+        </div>
+
+        <strong
+          id="douRemain"
+          style="font-size:22px;">
+          25
+        </strong>
+
+      </div>
+
+    </div>
+
+
+    <div class="progress">
+
+      <div
+        class="progressBar"
+        id="douProgress">
+      </div>
+
+    </div>
+
+  </section>
+
+
+
+  <!-- 搜尋 -->
+
+  <section class="card">
+
+    <div class="cardTitle">
+
+      <h2>
+        🔎 查詢報名資料
+      </h2>
+
+    </div>
+
+
+    <div class="searchRow">
+
+      <input
+        id="searchInput"
+        placeholder="輸入姓名、JLT編號或LINE名稱">
+
+      <button
+        class="primary"
+        onclick="searchRegistration()">
+
+        搜尋
+
+      </button>
+
+    </div>
+
+  </section>
+
+
+
+  <!-- 快速功能 -->
+
+  <section class="card">
+
+    <div class="cardTitle">
+
+      <h2>
+        ⚡ 快速管理
+      </h2>
+
+    </div>
+
+
+    <div class="quickGrid">
+
+      <div class="quick">
+
+        <span class="quickIcon">
+          📋
+        </span>
+
+        全部名冊
+
+      </div>
+
+
+      <div class="quick">
+
+        <span class="quickIcon">
+          💬
+        </span>
+
+        LINE 待確認
+
+      </div>
+
+
+      <div class="quick">
+
+        <span class="quickIcon">
+          💰
+        </span>
+
+        未繳清
+
+      </div>
+
+
+      <div class="quick">
+
+        <span class="quickIcon">
+          ⚠️
+        </span>
+
+        待處理
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+
+  <!-- 名冊 -->
+
+  <section class="card">
+
+    <div class="cardTitle">
+
+      <h2>
+        📋 報名名冊
+      </h2>
+
+      <span
+        id="resultCount"
+        style="font-size:13px;color:#777;">
+
+        0 筆
+
+      </span>
+
+    </div>
+
+
+    <div class="filters">
+
+      <button
+        class="filter active"
+        onclick="setFilter(this,'all')">
+
+        全部
+
+      </button>
+
+
+      <button
+        class="filter"
+        onclick="setFilter(this,'line')">
+
+        LINE待確認
+
+      </button>
+
+
+      <button
+        class="filter"
+        onclick="setFilter(this,'unpaid')">
+
+        未繳清
+
+      </button>
+
+
+      <button
+        class="filter"
+        onclick="setFilter(this,'dou')">
+
+        祈安禮斗
+
+      </button>
+
+
+      <button
+        class="filter"
+        onclick="setFilter(this,'problem')">
+
+        待處理
+
+      </button>
+
+    </div>
+
+
+    <div
+      class="tableWrap"
+      style="margin-top:15px;">
+
+      <table>
+
+        <thead>
+
+          <tr>
+
+            <th>報名編號</th>
+
+            <th>姓名</th>
+
+            <th>科儀</th>
+
+            <th>應繳</th>
+
+            <th>繳費</th>
+
+            <th>LINE</th>
+
+            <th>資料狀態</th>
+
+          </tr>
+
+        </thead>
+
+
+        <tbody id="registrationTable">
+
+          <tr>
+
+            <td
+              colspan="7"
+              class="empty">
+
+              尚未連接 Google 試算表
+
+            </td>
+
+          </tr>
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+  </section>
+
+
+</main>
+
+
+
+<script>
+
+/*
+============================================
+混元九龍太子聖誕
+工作人員報名管理網站
+============================================
+
+下一階段：
+GitHub Pages
+      ↓
+Google Apps Script API
+      ↓
+Google Sheets
+
+*/
+
+
+let registrations = [];
+
+let currentFilter = 'all';
+
+
+// ==========================================
+// 更新統計
+// ==========================================
+
+function updateDashboard(){
+
+  const total =
+    registrations.length;
+
+
+  const confirmed =
+    registrations.filter(
+      x => x.lineConfirmed
+    ).length;
+
+
+  const unpaid =
+    registrations.filter(
+      x => !x.paid
+    ).length;
+
+
+  const pending =
+    registrations.filter(
+      x => x.problem
+    ).length;
+
+
+  const dou =
+    registrations.filter(
+      x => x.dou
+    ).length;
+
+
+  document
+    .getElementById('totalPeople')
+    .textContent =
+      total;
+
+
+  document
+    .getElementById('lineConfirmed')
+    .textContent =
+      confirmed;
+
+
+  document
+    .getElementById('unpaid')
+    .textContent =
+      unpaid;
+
+
+  document
+    .getElementById('pending')
+    .textContent =
+      pending;
+
+
+  document
+    .getElementById('douCount')
+    .textContent =
+      dou;
+
+
+  document
+    .getElementById('douRemain')
+    .textContent =
+      Math.max(25 - dou,0);
+
+
+  document
+    .getElementById('douProgress')
+    .style.width =
+      Math.min(
+        dou / 25 * 100,
+        100
+      ) + '%';
+
+}
+
+
+
+// ==========================================
+// 顯示名冊
+// ==========================================
+
+function renderTable(){
+
+  const tbody =
+    document.getElementById(
+      'registrationTable'
+    );
+
+
+  let list =
+    registrations;
+
+
+  if(currentFilter === 'line'){
+
+    list =
+      list.filter(
+        x => !x.lineConfirmed
+      );
+
+  }
+
+
+  if(currentFilter === 'unpaid'){
+
+    list =
+      list.filter(
+        x => !x.paid
+      );
+
+  }
+
+
+  if(currentFilter === 'dou'){
+
+    list =
+      list.filter(
+        x => x.dou
+      );
+
+  }
+
+
+  if(currentFilter === 'problem'){
+
+    list =
+      list.filter(
+        x => x.problem
+      );
+
+  }
+
+
+  const keyword =
+    document
+      .getElementById('searchInput')
+      .value
+      .trim()
+      .toLowerCase();
+
+
+  if(keyword){
+
+    list =
+      list.filter(function(x){
+
+        return (
+
+          String(x.number || '')
+            .toLowerCase()
+            .includes(keyword)
+
+          ||
+
+          String(x.name || '')
+            .toLowerCase()
+            .includes(keyword)
+
+          ||
+
+          String(x.lineName || '')
+            .toLowerCase()
+            .includes(keyword)
+
+        );
+
+      });
+
+  }
+
+
+  document
+    .getElementById('resultCount')
+    .textContent =
+      list.length + ' 筆';
+
+
+  if(list.length === 0){
+
+    tbody.innerHTML =
+      '<tr>' +
+      '<td colspan="7" class="empty">' +
+      (
+        registrations.length
+          ? '沒有符合條件的資料'
+          : '尚未連接 Google 試算表'
+      ) +
+      '</td>' +
+      '</tr>';
+
+    return;
+
+  }
+
+
+  tbody.innerHTML =
+    list.map(function(x){
+
+
+      const rituals = [];
+
+      if(x.lamp){
+        rituals.push('七星元辰燈');
+      }
+
+      if(x.dou){
+        rituals.push('祈安禮斗');
+      }
+
+      if(x.gaigai){
+        rituals.push('祭改');
+      }
+
+
+      return `
+
+        <tr>
+
+          <td>
+            <strong>
+              ${escapeHtml(x.number)}
+            </strong>
+          </td>
+
+          <td>
+            ${escapeHtml(x.name)}
+          </td>
+
+          <td>
+            ${escapeHtml(
+              rituals.join('、')
+            )}
+          </td>
+
+          <td>
+            NT$ ${Number(
+              x.amount || 0
+            ).toLocaleString()}
+          </td>
+
+          <td>
+
+            ${
+              x.paid
+
+              ? '<span class="badge badgeGreen">已繳清</span>'
+
+              : '<span class="badge badgeOrange">未繳清</span>'
+            }
+
+          </td>
+
+          <td>
+
+            ${
+              x.lineConfirmed
+
+              ? '<span class="badge badgeGreen">已確認</span>'
+
+              : '<span class="badge badgeGray">未確認</span>'
+            }
+
+          </td>
+
+          <td>
+
+            ${
+              x.problem
+
+              ? '<span class="badge badgeRed">待處理</span>'
+
+              : '<span class="badge badgeGreen">完整</span>'
+            }
+
+          </td>
+
+        </tr>
+
+      `;
+
+    }).join('');
+
+}
+
+
+
+// ==========================================
+// 篩選
+// ==========================================
+
+function setFilter(
+  button,
+  filter
+){
+
+  document
+    .querySelectorAll('.filter')
+    .forEach(
+      x => x.classList.remove(
+        'active'
+      )
+    );
+
+
+  button
+    .classList
+    .add('active');
+
+
+  currentFilter =
+    filter;
+
+
+  renderTable();
+
+}
+
+
+
+// ==========================================
+// 搜尋
+// ==========================================
+
+function searchRegistration(){
+
+  renderTable();
+
+}
+
+
+
+// Enter直接搜尋
+
+document
+  .getElementById('searchInput')
+  .addEventListener(
+    'keydown',
+    function(e){
+
+      if(e.key === 'Enter'){
+        renderTable();
+      }
+
+    }
+  );
+
+
+
+// ==========================================
+// 防止資料破壞HTML
+// ==========================================
+
+function escapeHtml(value){
+
+  return String(value || '')
+
+    .replaceAll(
+      '&',
+      '&amp;'
+    )
+
+    .replaceAll(
+      '<',
+      '&lt;'
+    )
+
+    .replaceAll(
+      '>',
+      '&gt;'
+    )
+
+    .replaceAll(
+      '"',
+      '&quot;'
+    )
+
+    .replaceAll(
+      "'",
+      '&#039;'
+    );
+
+}
+
+
+
+// 初始化
+
+updateDashboard();
+
+renderTable();
+
+</script>
+
+
+</body>
+</html>
