@@ -3,35 +3,38 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex,nofollow">
 
 <title>混元九龍太子聖誕｜報名管理中心</title>
 
 <style>
-*{
-  box-sizing:border-box;
-}
+*{box-sizing:border-box}
 
 body{
   margin:0;
-  font-family:
-    -apple-system,
-    BlinkMacSystemFont,
-    "Noto Sans TC",
-    "Microsoft JhengHei",
-    sans-serif;
+  font-family:-apple-system,BlinkMacSystemFont,"Noto Sans TC","Microsoft JhengHei",sans-serif;
   background:#f6f2ea;
   color:#35261c;
 }
 
+.hidden{display:none!important}
+
 .header{
   background:linear-gradient(135deg,#71351f,#9b5130);
   color:white;
-  padding:26px 18px 30px;
+  padding:24px 18px 28px;
 }
 
 .headerInner{
   max-width:1100px;
   margin:auto;
+}
+
+.headerTop{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:12px;
 }
 
 .headerSmall{
@@ -50,25 +53,37 @@ body{
   opacity:.9;
 }
 
+.logoutBtn{
+  background:rgba(255,255,255,.16);
+  color:white;
+  border:1px solid rgba(255,255,255,.3);
+  padding:9px 13px;
+  font-size:14px;
+}
+
 .container{
   max-width:1100px;
   margin:auto;
   padding:18px;
 }
 
-
-/* 狀態 */
-
 .statusBar{
   display:flex;
   align-items:center;
-  gap:8px;
+  justify-content:space-between;
+  gap:12px;
   background:#fff;
   padding:12px 15px;
   border-radius:12px;
   margin-bottom:16px;
   box-shadow:0 2px 8px rgba(0,0,0,.06);
   font-size:14px;
+}
+
+.statusLeft{
+  display:flex;
+  align-items:center;
+  gap:8px;
 }
 
 .statusDot{
@@ -78,8 +93,16 @@ body{
   border-radius:50%;
 }
 
+.statusDot.online{background:#2d8a4c}
+.statusDot.error{background:#b53e2e}
+.statusDot.loading{background:#d28b1d}
 
-/* 統計 */
+.refreshBtn{
+  padding:7px 11px;
+  font-size:13px;
+  background:#eee5da;
+  color:#4c382c;
+}
 
 .stats{
   display:grid;
@@ -112,24 +135,10 @@ body{
   margin-top:4px;
 }
 
-.red{
-  color:#a43d27;
-}
-
-.green{
-  color:#277442;
-}
-
-.orange{
-  color:#a96712;
-}
-
-.blue{
-  color:#315e8d;
-}
-
-
-/* 卡片 */
+.red{color:#a43d27}
+.green{color:#277442}
+.orange{color:#a96712}
+.blue{color:#315e8d}
 
 .card{
   background:white;
@@ -155,9 +164,6 @@ body{
   color:#743b23;
 }
 
-
-/* 禮斗 */
-
 .douTop{
   display:flex;
   justify-content:space-between;
@@ -180,14 +186,34 @@ body{
 }
 
 .progressBar{
-  width:0%;
+  width:0;
   height:100%;
   background:#8c4c2e;
   transition:.3s;
 }
 
+.moneyGrid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:12px;
+}
 
-/* 搜尋 */
+.moneyBox{
+  padding:15px;
+  background:#faf6f0;
+  border-radius:12px;
+}
+
+.moneyLabel{
+  font-size:13px;
+  color:#796b60;
+}
+
+.moneyValue{
+  font-size:23px;
+  font-weight:800;
+  margin-top:5px;
+}
 
 .searchRow{
   display:flex;
@@ -221,9 +247,6 @@ button{
   color:#4c382c;
 }
 
-
-/* 篩選 */
-
 .filters{
   display:flex;
   gap:8px;
@@ -242,12 +265,7 @@ button{
   color:white;
 }
 
-
-/* 表格 */
-
-.tableWrap{
-  overflow-x:auto;
-}
+.tableWrap{overflow-x:auto}
 
 table{
   width:100%;
@@ -269,14 +287,14 @@ td{
   font-size:14px;
 }
 
+.dataRow{cursor:pointer}
+.dataRow:hover{background:#fcf8f3}
+
 .empty{
   text-align:center;
   padding:35px 10px;
   color:#999;
 }
-
-
-/* 狀態標籤 */
 
 .badge{
   display:inline-block;
@@ -306,9 +324,6 @@ td{
   color:#666;
 }
 
-
-/* 快速功能 */
-
 .quickGrid{
   display:grid;
   grid-template-columns:repeat(4,1fr);
@@ -322,7 +337,10 @@ td{
   padding:17px 10px;
   text-align:center;
   font-weight:bold;
+  cursor:pointer;
 }
+
+.quick:active{transform:scale(.98)}
 
 .quickIcon{
   display:block;
@@ -330,227 +348,312 @@ td{
   margin-bottom:7px;
 }
 
+/* 登入 */
+.loginScreen{
+  min-height:calc(100vh - 120px);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:25px 16px;
+}
 
-/* 手機 */
+.loginCard{
+  width:100%;
+  max-width:430px;
+  background:white;
+  border-radius:20px;
+  padding:28px 22px;
+  box-shadow:0 8px 30px rgba(67,42,26,.12);
+}
+
+.loginIcon{
+  text-align:center;
+  font-size:48px;
+  margin-bottom:10px;
+}
+
+.loginCard h2{
+  text-align:center;
+  color:#743b23;
+  margin:5px 0;
+}
+
+.loginCard p{
+  text-align:center;
+  color:#827469;
+  font-size:14px;
+  line-height:1.6;
+}
+
+.loginCard input{
+  width:100%;
+  padding:15px;
+  border:1px solid #cdbda9;
+  border-radius:11px;
+  font-size:17px;
+  margin-top:10px;
+}
+
+.loginCard button{
+  width:100%;
+  margin-top:13px;
+}
+
+.loginMessage{
+  min-height:22px;
+  margin-top:12px;
+  text-align:center;
+  font-size:14px;
+  color:#a43d27;
+}
+
+/* 詳細資料 */
+.modal{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.48);
+  z-index:999;
+  display:flex;
+  align-items:flex-end;
+  justify-content:center;
+}
+
+.modalBox{
+  width:100%;
+  max-width:700px;
+  max-height:88vh;
+  overflow:auto;
+  background:white;
+  border-radius:22px 22px 0 0;
+  padding:20px;
+}
+
+.modalHeader{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  border-bottom:2px solid #eee4d8;
+  padding-bottom:12px;
+  margin-bottom:15px;
+}
+
+.modalHeader h2{
+  margin:0;
+  color:#743b23;
+}
+
+.closeBtn{
+  background:#eee5da;
+  color:#4c382c;
+  padding:8px 12px;
+}
+
+.detailGrid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+}
+
+.detailItem{
+  background:#faf6f0;
+  padding:12px;
+  border-radius:10px;
+}
+
+.detailLabel{
+  font-size:12px;
+  color:#88786c;
+  margin-bottom:5px;
+}
+
+.detailValue{
+  font-weight:700;
+  word-break:break-word;
+}
+
+.full{grid-column:1/-1}
 
 @media(max-width:800px){
-
-  .stats{
-    grid-template-columns:repeat(2,1fr);
-  }
-
-  .quickGrid{
-    grid-template-columns:repeat(2,1fr);
-  }
-
+  .stats{grid-template-columns:repeat(2,1fr)}
+  .quickGrid{grid-template-columns:repeat(2,1fr)}
 }
 
 @media(max-width:500px){
-
-  .header h1{
-    font-size:23px;
-  }
-
-  .container{
-    padding:12px;
-  }
-
-  .statNumber{
-    font-size:26px;
-  }
-
-  .searchRow{
-    flex-direction:column;
-  }
-
+  .header h1{font-size:22px}
+  .container{padding:12px}
+  .statNumber{font-size:26px}
+  .searchRow{flex-direction:column}
+  .moneyGrid{grid-template-columns:1fr}
+  .detailGrid{grid-template-columns:1fr}
+  .full{grid-column:auto}
 }
 </style>
 </head>
 
-
 <body>
 
-
 <header class="header">
-
   <div class="headerInner">
+    <div class="headerTop">
+      <div>
+        <div class="headerSmall">混元九龍</div>
+        <h1>🙏 太子聖誕報名管理中心</h1>
+        <p>工作人員專用｜報名、收款與名冊管理</p>
+      </div>
 
-    <div class="headerSmall">
-      混元九龍
+      <button
+        id="logoutBtn"
+        class="logoutBtn hidden"
+        onclick="logout()">
+        登出
+      </button>
     </div>
-
-    <h1>
-      🙏 太子聖誕報名管理中心
-    </h1>
-
-    <p>
-      工作人員專用｜報名、收款與名冊管理
-    </p>
-
   </div>
-
 </header>
 
 
-<main class="container">
+<!-- 登入 -->
+<section id="loginScreen" class="loginScreen">
+  <div class="loginCard">
+
+    <div class="loginIcon">🔐</div>
+
+    <h2>工作人員登入</h2>
+
+    <p>
+      請輸入管理密碼。<br>
+      登入後才會載入報名名冊。
+    </p>
+
+    <input
+      id="passwordInput"
+      type="password"
+      autocomplete="current-password"
+      placeholder="管理密碼">
+
+    <button
+      id="loginBtn"
+      class="primary"
+      onclick="login()">
+      登入管理中心
+    </button>
+
+    <div
+      id="loginMessage"
+      class="loginMessage">
+    </div>
+
+  </div>
+</section>
 
 
-  <!-- 系統狀態 -->
+<!-- 管理中心 -->
+<main
+  id="dashboard"
+  class="container hidden">
 
   <div class="statusBar">
 
-    <div
-      class="statusDot"
-      id="statusDot">
+    <div class="statusLeft">
+      <div
+        class="statusDot loading"
+        id="statusDot">
+      </div>
+
+      <span id="systemStatus">
+        正在連接 Google 試算表…
+      </span>
     </div>
 
-    <span id="systemStatus">
-      尚未連接 Google 試算表
-    </span>
+    <button
+      class="refreshBtn"
+      onclick="loadDashboard()">
+      ↻ 重新整理
+    </button>
 
   </div>
 
-
-
-  <!-- 統計 -->
 
   <section class="stats">
 
     <div class="stat">
-
-      <div class="statTitle">
-        👥 正式報名
-      </div>
-
-      <div
-        class="statNumber blue"
-        id="totalPeople">
-        0
-      </div>
-
-      <div class="statSub">
-        人
-      </div>
-
+      <div class="statTitle">👥 正式報名</div>
+      <div class="statNumber blue" id="totalPeople">0</div>
+      <div class="statSub">人</div>
     </div>
 
-
     <div class="stat">
-
-      <div class="statTitle">
-        💬 LINE 已確認
-      </div>
-
-      <div
-        class="statNumber green"
-        id="lineConfirmed">
-        0
-      </div>
-
-      <div class="statSub">
-        人
-      </div>
-
+      <div class="statTitle">💬 LINE 已確認</div>
+      <div class="statNumber green" id="lineConfirmed">0</div>
+      <div class="statSub">人</div>
     </div>
 
-
     <div class="stat">
-
-      <div class="statTitle">
-        💰 未繳清
-      </div>
-
-      <div
-        class="statNumber orange"
-        id="unpaid">
-        0
-      </div>
-
-      <div class="statSub">
-        人
-      </div>
-
+      <div class="statTitle">💰 未繳清</div>
+      <div class="statNumber orange" id="unpaid">0</div>
+      <div class="statSub">人</div>
     </div>
 
-
     <div class="stat">
-
-      <div class="statTitle">
-        ⚠️ 待處理
-      </div>
-
-      <div
-        class="statNumber red"
-        id="pending">
-        0
-      </div>
-
-      <div class="statSub">
-        筆
-      </div>
-
+      <div class="statTitle">⚠️ 待處理</div>
+      <div class="statNumber red" id="pending">0</div>
+      <div class="statSub">筆</div>
     </div>
 
   </section>
 
 
-
-  <!-- 禮斗名額 -->
-
   <section class="card">
 
     <div class="cardTitle">
-
-      <h2>
-        🏮 祈安禮斗名額
-      </h2>
-
+      <h2>🏮 祈安禮斗名額</h2>
     </div>
-
 
     <div class="douTop">
 
       <div>
-
-        <div style="font-size:14px;color:#777;">
-          目前報名
-        </div>
-
+        <div style="font-size:14px;color:#777">目前報名</div>
         <div class="douNumber">
-
-          <span id="douCount">
-            0
-          </span>
-
-          / 25
-
+          <span id="douCount">0</span> /
+          <span id="douLimit">25</span>
         </div>
-
       </div>
 
-
-      <div style="text-align:right;">
-
-        <div style="font-size:14px;color:#777;">
-          剩餘名額
-        </div>
-
-        <strong
-          id="douRemain"
-          style="font-size:22px;">
-          25
-        </strong>
-
+      <div style="text-align:right">
+        <div style="font-size:14px;color:#777">剩餘名額</div>
+        <strong id="douRemain" style="font-size:22px">25</strong>
       </div>
 
     </div>
 
-
     <div class="progress">
+      <div class="progressBar" id="douProgress"></div>
+    </div>
 
-      <div
-        class="progressBar"
-        id="douProgress">
+  </section>
+
+
+  <section class="card">
+
+    <div class="cardTitle">
+      <h2>💵 收款統計</h2>
+    </div>
+
+    <div class="moneyGrid">
+
+      <div class="moneyBox">
+        <div class="moneyLabel">應收總額</div>
+        <div class="moneyValue blue" id="amountTotal">NT$ 0</div>
+      </div>
+
+      <div class="moneyBox">
+        <div class="moneyLabel">已收總額</div>
+        <div class="moneyValue green" id="receivedTotal">NT$ 0</div>
+      </div>
+
+      <div class="moneyBox">
+        <div class="moneyLabel">尚未收款</div>
+        <div class="moneyValue orange" id="outstandingTotal">NT$ 0</div>
       </div>
 
     </div>
@@ -558,19 +661,11 @@ td{
   </section>
 
 
-
-  <!-- 搜尋 -->
-
   <section class="card">
 
     <div class="cardTitle">
-
-      <h2>
-        🔎 查詢報名資料
-      </h2>
-
+      <h2>🔎 查詢報名資料</h2>
     </div>
-
 
     <div class="searchRow">
 
@@ -580,10 +675,8 @@ td{
 
       <button
         class="primary"
-        onclick="searchRegistration()">
-
+        onclick="renderTable()">
         搜尋
-
       </button>
 
     </div>
@@ -591,63 +684,32 @@ td{
   </section>
 
 
-
-  <!-- 快速功能 -->
-
   <section class="card">
 
     <div class="cardTitle">
-
-      <h2>
-        ⚡ 快速管理
-      </h2>
-
+      <h2>⚡ 快速管理</h2>
     </div>
-
 
     <div class="quickGrid">
 
-      <div class="quick">
-
-        <span class="quickIcon">
-          📋
-        </span>
-
+      <div class="quick" onclick="quickFilter('all')">
+        <span class="quickIcon">📋</span>
         全部名冊
-
       </div>
 
-
-      <div class="quick">
-
-        <span class="quickIcon">
-          💬
-        </span>
-
+      <div class="quick" onclick="quickFilter('line')">
+        <span class="quickIcon">💬</span>
         LINE 待確認
-
       </div>
 
-
-      <div class="quick">
-
-        <span class="quickIcon">
-          💰
-        </span>
-
+      <div class="quick" onclick="quickFilter('unpaid')">
+        <span class="quickIcon">💰</span>
         未繳清
-
       </div>
 
-
-      <div class="quick">
-
-        <span class="quickIcon">
-          ⚠️
-        </span>
-
+      <div class="quick" onclick="quickFilter('problem')">
+        <span class="quickIcon">⚠️</span>
         待處理
-
       </div>
 
     </div>
@@ -655,120 +717,66 @@ td{
   </section>
 
 
-
-  <!-- 名冊 -->
-
   <section class="card">
 
     <div class="cardTitle">
-
-      <h2>
-        📋 報名名冊
-      </h2>
-
-      <span
-        id="resultCount"
-        style="font-size:13px;color:#777;">
-
+      <h2>📋 報名名冊</h2>
+      <span id="resultCount" style="font-size:13px;color:#777">
         0 筆
-
       </span>
-
     </div>
-
 
     <div class="filters">
 
-      <button
-        class="filter active"
+      <button class="filter active" data-filter="all"
         onclick="setFilter(this,'all')">
-
         全部
-
       </button>
 
-
-      <button
-        class="filter"
+      <button class="filter" data-filter="line"
         onclick="setFilter(this,'line')">
-
         LINE待確認
-
       </button>
 
-
-      <button
-        class="filter"
+      <button class="filter" data-filter="unpaid"
         onclick="setFilter(this,'unpaid')">
-
         未繳清
-
       </button>
 
-
-      <button
-        class="filter"
+      <button class="filter" data-filter="dou"
         onclick="setFilter(this,'dou')">
-
         祈安禮斗
-
       </button>
 
-
-      <button
-        class="filter"
+      <button class="filter" data-filter="problem"
         onclick="setFilter(this,'problem')">
-
         待處理
-
       </button>
 
     </div>
 
-
-    <div
-      class="tableWrap"
-      style="margin-top:15px;">
+    <div class="tableWrap" style="margin-top:15px">
 
       <table>
 
         <thead>
-
           <tr>
-
             <th>報名編號</th>
-
             <th>姓名</th>
-
             <th>科儀</th>
-
             <th>應繳</th>
-
             <th>繳費</th>
-
             <th>LINE</th>
-
             <th>資料狀態</th>
-
           </tr>
-
         </thead>
 
-
         <tbody id="registrationTable">
-
           <tr>
-
-            <td
-              colspan="7"
-              class="empty">
-
-              尚未連接 Google 試算表
-
+            <td colspan="7" class="empty">
+              正在載入資料…
             </td>
-
           </tr>
-
         </tbody>
 
       </table>
@@ -777,130 +785,511 @@ td{
 
   </section>
 
-
 </main>
 
+
+<!-- 詳細資料 -->
+<div
+  id="detailModal"
+  class="modal hidden"
+  onclick="modalBackground(event)">
+
+  <div class="modalBox">
+
+    <div class="modalHeader">
+      <h2>📋 報名詳細資料</h2>
+
+      <button
+        class="closeBtn"
+        onclick="closeDetail()">
+        關閉
+      </button>
+    </div>
+
+    <div
+      id="detailContent"
+      class="detailGrid">
+    </div>
+
+  </div>
+
+</div>
 
 
 <script>
 
-/*
-============================================
-混元九龍太子聖誕
-工作人員報名管理網站
-============================================
+// ==========================================
+// Apps Script API
+// ==========================================
 
-下一階段：
-GitHub Pages
-      ↓
-Google Apps Script API
-      ↓
-Google Sheets
-
-*/
-
+const API_URL =
+  'https://script.google.com/macros/s/AKfycbyhFxmZB6pbgdRMPoxjtsEmIDwnsEXsP_i1FD8zNOXAUe-Jk4-BgbbN4P-2yRMYiSx7/exec';
 
 let registrations = [];
-
 let currentFilter = 'all';
+let sessionToken = '';
 
 
 // ==========================================
-// 更新統計
+// 登入
 // ==========================================
 
-function updateDashboard(){
+async function login(){
+
+  const password =
+    document
+      .getElementById('passwordInput')
+      .value;
+
+  const message =
+    document
+      .getElementById('loginMessage');
+
+  const button =
+    document
+      .getElementById('loginBtn');
+
+
+  if(!password){
+
+    message.textContent =
+      '請輸入管理密碼';
+
+    return;
+  }
+
+
+  message.textContent =
+    '正在驗證…';
+
+  button.disabled = true;
+
+
+  try{
+
+    const response =
+      await fetch(API_URL,{
+        method:'POST',
+        headers:{
+          'Content-Type':'text/plain;charset=utf-8'
+        },
+        body:JSON.stringify({
+          action:'login',
+          password:password
+        })
+      });
+
+
+    const result =
+      await response.json();
+
+
+    if(!result.success){
+
+      throw new Error(
+        result.message ||
+        '登入失敗'
+      );
+    }
+
+
+    sessionToken =
+      result.token;
+
+
+    sessionStorage.setItem(
+      'jiulongAdminToken',
+      sessionToken
+    );
+
+
+    document
+      .getElementById('passwordInput')
+      .value = '';
+
+
+    showDashboard();
+
+
+    await loadDashboard();
+
+
+  }catch(error){
+
+    message.textContent =
+      '登入失敗：' +
+      error.message;
+
+  }finally{
+
+    button.disabled = false;
+
+  }
+
+}
+
+
+// ==========================================
+// 顯示管理中心
+// ==========================================
+
+function showDashboard(){
+
+  document
+    .getElementById('loginScreen')
+    .classList.add('hidden');
+
+
+  document
+    .getElementById('dashboard')
+    .classList.remove('hidden');
+
+
+  document
+    .getElementById('logoutBtn')
+    .classList.remove('hidden');
+
+}
+
+
+// ==========================================
+// 顯示登入
+// ==========================================
+
+function showLogin(message=''){
+
+  registrations = [];
+  sessionToken = '';
+
+  sessionStorage.removeItem(
+    'jiulongAdminToken'
+  );
+
+
+  document
+    .getElementById('dashboard')
+    .classList.add('hidden');
+
+
+  document
+    .getElementById('logoutBtn')
+    .classList.add('hidden');
+
+
+  document
+    .getElementById('loginScreen')
+    .classList.remove('hidden');
+
+
+  document
+    .getElementById('loginMessage')
+    .textContent =
+      message;
+
+}
+
+
+// ==========================================
+// 登出
+// ==========================================
+
+async function logout(){
+
+  const oldToken =
+    sessionToken;
+
+
+  showLogin(
+    '已安全登出'
+  );
+
+
+  if(!oldToken){
+    return;
+  }
+
+
+  try{
+
+    await fetch(API_URL,{
+      method:'POST',
+      headers:{
+        'Content-Type':'text/plain;charset=utf-8'
+      },
+      body:JSON.stringify({
+        action:'logout',
+        token:oldToken
+      })
+    });
+
+  }catch(error){
+    // 本機已清除登入狀態即可
+  }
+
+}
+
+
+// ==========================================
+// 載入 Dashboard
+// ==========================================
+
+async function loadDashboard(){
+
+  if(!sessionToken){
+
+    showLogin(
+      '請先登入'
+    );
+
+    return;
+  }
+
+
+  setStatus(
+    'loading',
+    '正在讀取 Google 試算表…'
+  );
+
+
+  try{
+
+    const url =
+      API_URL +
+      '?api=dashboard&token=' +
+      encodeURIComponent(
+        sessionToken
+      ) +
+      '&t=' +
+      Date.now();
+
+
+    const response =
+      await fetch(
+        url,
+        {
+          cache:'no-store'
+        }
+      );
+
+
+    const result =
+      await response.json();
+
+
+    if(
+      result.authRequired
+    ){
+
+      showLogin(
+        '登入已失效，請重新登入'
+      );
+
+      return;
+    }
+
+
+    if(!result.success){
+
+      throw new Error(
+        result.message ||
+        '讀取失敗'
+      );
+    }
+
+
+    const data =
+      result.data || {};
+
+
+    registrations =
+      Array.isArray(
+        data.registrations
+      )
+      ? data.registrations
+      : [];
+
+
+    updateDashboard(
+      data.stats || {}
+    );
+
+
+    renderTable();
+
+
+    setStatus(
+      'online',
+      '已連接 Google 試算表'
+    );
+
+
+  }catch(error){
+
+    setStatus(
+      'error',
+      '讀取失敗：' +
+      error.message
+    );
+
+  }
+
+}
+
+
+// ==========================================
+// 系統狀態
+// ==========================================
+
+function setStatus(
+  type,
+  text
+){
+
+  const dot =
+    document
+      .getElementById('statusDot');
+
+
+  dot.className =
+    'statusDot ' + type;
+
+
+  document
+    .getElementById('systemStatus')
+    .textContent =
+      text;
+
+}
+
+
+// ==========================================
+// Dashboard 統計
+// ==========================================
+
+function updateDashboard(stats){
 
   const total =
-    registrations.length;
-
+    Number(
+      stats.totalPeople || 0
+    );
 
   const confirmed =
-    registrations.filter(
-      x => x.lineConfirmed
-    ).length;
-
+    Number(
+      stats.lineConfirmed || 0
+    );
 
   const unpaid =
-    registrations.filter(
-      x => !x.paid
-    ).length;
-
+    Number(
+      stats.unpaid || 0
+    );
 
   const pending =
-    registrations.filter(
-      x => x.problem
-    ).length;
-
+    Number(
+      stats.pending || 0
+    );
 
   const dou =
-    registrations.filter(
-      x => x.dou
-    ).length;
+    Number(
+      stats.douCount || 0
+    );
+
+  const limit =
+    Number(
+      stats.douLimit || 25
+    );
 
 
   document
     .getElementById('totalPeople')
-    .textContent =
-      total;
+    .textContent = total;
 
 
   document
     .getElementById('lineConfirmed')
-    .textContent =
-      confirmed;
+    .textContent = confirmed;
 
 
   document
     .getElementById('unpaid')
-    .textContent =
-      unpaid;
+    .textContent = unpaid;
 
 
   document
     .getElementById('pending')
-    .textContent =
-      pending;
+    .textContent = pending;
 
 
   document
     .getElementById('douCount')
-    .textContent =
-      dou;
+    .textContent = dou;
+
+
+  document
+    .getElementById('douLimit')
+    .textContent = limit;
 
 
   document
     .getElementById('douRemain')
     .textContent =
-      Math.max(25 - dou,0);
+      Math.max(
+        limit - dou,
+        0
+      );
 
 
   document
     .getElementById('douProgress')
     .style.width =
       Math.min(
-        dou / 25 * 100,
+        limit
+          ? dou / limit * 100
+          : 0,
         100
       ) + '%';
+
+
+  document
+    .getElementById('amountTotal')
+    .textContent =
+      money(
+        stats.amountTotal
+      );
+
+
+  document
+    .getElementById('receivedTotal')
+    .textContent =
+      money(
+        stats.receivedTotal
+      );
+
+
+  document
+    .getElementById('outstandingTotal')
+    .textContent =
+      money(
+        stats.outstandingTotal
+      );
 
 }
 
 
-
 // ==========================================
-// 顯示名冊
+// 名冊
 // ==========================================
 
 function renderTable(){
 
   const tbody =
-    document.getElementById(
-      'registrationTable'
-    );
+    document
+      .getElementById(
+        'registrationTable'
+      );
 
 
   let list =
-    registrations;
+    [...registrations];
 
 
   if(currentFilter === 'line'){
@@ -995,7 +1384,7 @@ function renderTable(){
       (
         registrations.length
           ? '沒有符合條件的資料'
-          : '尚未連接 Google 試算表'
+          : '目前沒有報名資料'
       ) +
       '</td>' +
       '</tr>';
@@ -1008,25 +1397,32 @@ function renderTable(){
   tbody.innerHTML =
     list.map(function(x){
 
-
       const rituals = [];
 
       if(x.lamp){
-        rituals.push('七星元辰燈');
+        rituals.push(
+          '七星元辰燈'
+        );
       }
 
       if(x.dou){
-        rituals.push('祈安禮斗');
+        rituals.push(
+          '祈安禮斗'
+        );
       }
 
       if(x.gaigai){
-        rituals.push('祭改');
+        rituals.push(
+          '祭改'
+        );
       }
 
 
       return `
 
-        <tr>
+        <tr
+          class="dataRow"
+          onclick="openDetail(${Number(x.row)})">
 
           <td>
             <strong>
@@ -1045,9 +1441,7 @@ function renderTable(){
           </td>
 
           <td>
-            NT$ ${Number(
-              x.amount || 0
-            ).toLocaleString()}
+            ${money(x.amount)}
           </td>
 
           <td>
@@ -1095,7 +1489,6 @@ function renderTable(){
 }
 
 
-
 // ==========================================
 // 篩選
 // ==========================================
@@ -1108,9 +1501,10 @@ function setFilter(
   document
     .querySelectorAll('.filter')
     .forEach(
-      x => x.classList.remove(
-        'active'
-      )
+      x =>
+        x.classList.remove(
+          'active'
+        )
     );
 
 
@@ -1128,43 +1522,221 @@ function setFilter(
 }
 
 
+function quickFilter(filter){
 
-// ==========================================
-// 搜尋
-// ==========================================
+  const button =
+    document.querySelector(
+      '.filter[data-filter="' +
+      filter +
+      '"]'
+    );
 
-function searchRegistration(){
 
-  renderTable();
+  if(button){
+
+    setFilter(
+      button,
+      filter
+    );
+
+  }
 
 }
 
 
+// ==========================================
+// 詳細資料
+// ==========================================
 
-// Enter直接搜尋
+function openDetail(row){
 
-document
-  .getElementById('searchInput')
-  .addEventListener(
-    'keydown',
-    function(e){
+  const x =
+    registrations.find(
+      item =>
+        Number(item.row) ===
+        Number(row)
+    );
 
-      if(e.key === 'Enter'){
-        renderTable();
-      }
 
-    }
-  );
+  if(!x){
+    return;
+  }
 
+
+  const rituals = [];
+
+  if(x.lamp){
+    rituals.push('七星元辰燈');
+  }
+
+  if(x.dou){
+    rituals.push('祈安禮斗');
+  }
+
+  if(x.gaigai){
+    rituals.push('祭改');
+  }
+
+
+  const html = `
+
+    ${detail('報名編號',x.number)}
+
+    ${detail('建檔日期',x.createdAt)}
+
+    ${detail('LINE名稱 / 聯絡人',x.lineName)}
+
+    ${detail('姓名',x.name)}
+
+    ${detail('生辰',x.birthday)}
+
+    ${detail('時辰',x.time)}
+
+    ${detail('生肖',x.zodiac)}
+
+    ${detail('地址',x.address,true)}
+
+    ${detail(
+      '科儀',
+      rituals.join('、') || '無',
+      true
+    )}
+
+    ${detail(
+      '祭改到場',
+      x.attendance
+    )}
+
+    ${detail(
+      '應繳金額',
+      money(x.amount)
+    )}
+
+    ${detail(
+      '實收金額',
+      money(x.received)
+    )}
+
+    ${detail(
+      '未收金額',
+      money(x.outstanding)
+    )}
+
+    ${detail(
+      '繳費狀態',
+      x.paymentStatus
+    )}
+
+    ${detail(
+      'LINE確認',
+      x.lineStatus
+    )}
+
+    ${detail(
+      '資料完整性',
+      x.completeStatus
+    )}
+
+    ${detail(
+      '疑似重複',
+      x.duplicateStatus || '無'
+    )}
+
+    ${detail(
+      '備註',
+      x.note || '無',
+      true
+    )}
+
+  `;
+
+
+  document
+    .getElementById('detailContent')
+    .innerHTML =
+      html;
+
+
+  document
+    .getElementById('detailModal')
+    .classList.remove('hidden');
+
+}
+
+
+function detail(
+  label,
+  value,
+  full=false
+){
+
+  return `
+
+    <div class="detailItem ${full ? 'full' : ''}">
+
+      <div class="detailLabel">
+        ${escapeHtml(label)}
+      </div>
+
+      <div class="detailValue">
+        ${escapeHtml(value || '-')}
+      </div>
+
+    </div>
+
+  `;
+
+}
+
+
+function closeDetail(){
+
+  document
+    .getElementById('detailModal')
+    .classList.add('hidden');
+
+}
+
+
+function modalBackground(e){
+
+  if(
+    e.target.id ===
+    'detailModal'
+  ){
+
+    closeDetail();
+
+  }
+
+}
 
 
 // ==========================================
-// 防止資料破壞HTML
+// 金額
+// ==========================================
+
+function money(value){
+
+  return (
+    'NT$ ' +
+    Number(
+      value || 0
+    ).toLocaleString(
+      'zh-TW'
+    )
+  );
+
+}
+
+
+// ==========================================
+// HTML 防護
 // ==========================================
 
 function escapeHtml(value){
 
-  return String(value || '')
+  return String(value ?? '')
 
     .replaceAll(
       '&',
@@ -1194,15 +1766,72 @@ function escapeHtml(value){
 }
 
 
+// ==========================================
+// Enter
+// ==========================================
 
-// 初始化
+document
+  .getElementById(
+    'passwordInput'
+  )
+  .addEventListener(
+    'keydown',
+    function(e){
 
-updateDashboard();
+      if(e.key === 'Enter'){
+        login();
+      }
 
-renderTable();
+    }
+  );
+
+
+document
+  .getElementById(
+    'searchInput'
+  )
+  .addEventListener(
+    'input',
+    renderTable
+  );
+
+
+// ==========================================
+// 啟動
+// ==========================================
+
+async function init(){
+
+  const token =
+    sessionStorage.getItem(
+      'jiulongAdminToken'
+    );
+
+
+  if(!token){
+
+    showLogin();
+
+    return;
+
+  }
+
+
+  sessionToken =
+    token;
+
+
+  showDashboard();
+
+
+  await loadDashboard();
+
+}
+
+
+init();
 
 </script>
-
 
 </body>
 </html>
